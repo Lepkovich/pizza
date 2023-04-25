@@ -128,6 +128,9 @@
 }
 /*375 - 424*/
 @media screen and (max-width: 424px ){
+    .header .container {
+        justify-content: space-between;
+    }
     .menu {
         display: none;
     }
@@ -141,7 +144,7 @@
         margin: 0;
         top: 0;
         left: 0;
-        background: #000000c4;
+        background: rgba(0, 0, 0, 0.87);
     }
     .menu ul {
         flex-direction: column;
@@ -164,6 +167,7 @@
     .menu.open {
         display: flex;
         align-items: center;
+
     }
     .menu .close {
         display: block;

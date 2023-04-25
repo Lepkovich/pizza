@@ -1,2 +1,3 @@
-# pizza
-landing flex responsive form-validation
+# jquery
+Переписал ванильный js на jquery
+
