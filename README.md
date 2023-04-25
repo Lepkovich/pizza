@@ -1,2 +1,6 @@
 # pizza
-landing flex responsive form-validation
+landing с использованием flex <br>
+responsive <br>
+vanilla js
+
+
