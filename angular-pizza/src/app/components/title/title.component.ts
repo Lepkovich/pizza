@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, ContentChild, ElementRef, Input} from '@angular/core';
 
 @Component({
   selector: 'custom-title',
@@ -8,6 +8,12 @@ import {Component, Input} from '@angular/core';
 export class TitleComponent {
 
   @Input()  title: string = '';
+  @ContentChild('second')
+  private second!: ElementRef;
+
+  ngAfterViewInit() {
+    console.log(this.second);
+  }
 
   toUpper() {
     return this.title.toUpperCase()
