@@ -1,0 +1,15 @@
+<div class="product">
+  <div class="product-image">
+    <!--          <img [src]="'assets/images/products/' + product.image" alt="Пицца Мясная Делюкс">-->
+    <img src="assets/images/products/{{product.image}}">
+  </div>
+  <custom-title [title]="product.title" #customTitle></custom-title>
+<!--  <div class="product-title">{{product.title}}</div>-->
+
+  <div class="product-text">{{product.description}}</div>
+  <div class="product-action">
+    <button class="btn btn-add-to-cart" (click)="addProductToCart(customTitle.toUpper())" >В корзину</button>
+  </div>
+</div>
+
+<!--(click)="addToCart(product, orderElement)"-->
