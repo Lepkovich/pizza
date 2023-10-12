@@ -8,11 +8,9 @@ import {Component, ContentChild, ElementRef, Input} from '@angular/core';
 export class TitleComponent {
 
   @Input()  title: string = '';
-  @ContentChild('second')
-  private second!: ElementRef;
 
-  ngAfterViewInit() {
-    console.log(this.second);
+  constructor() {
+
   }
 
   toUpper() {

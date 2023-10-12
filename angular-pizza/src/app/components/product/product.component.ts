@@ -41,12 +41,12 @@ export class ProductComponent implements  OnChanges{
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('ngOnChanges', changes)
+    // console.log('ngOnChanges', changes)
   }
 
-  ngAfterViewInit() {
-      console.log(this.elem)
-    }
+  // ngAfterViewInit() {
+  //     console.log(this.elem)
+  //   }
 
     addProductToCart() {
       this.addToCartEvent.emit(this.titleComponent.toUpper());
