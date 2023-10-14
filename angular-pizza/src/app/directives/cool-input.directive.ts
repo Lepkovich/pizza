@@ -1,4 +1,6 @@
-import {Directive, ElementRef, HostListener, Input, OnInit, Renderer2} from '@angular/core';
+import {Directive, ElementRef, HostBinding, HostListener, Input, OnInit, Renderer2} from '@angular/core';
+import {style} from "@angular/animations";
+import {takeUntil} from "rxjs";
 
 @Directive({
   selector: '[coolInput]'
@@ -13,14 +15,28 @@ export class CoolInputDirective implements OnInit{
               private rend: Renderer2) {
   }
 
+  private _backgroundColor: string = '';
+  @HostBinding('style.backgroundColor')
+  get getBgColor() {
+    return  this._backgroundColor
+  }
+
+  private _isOnFocus: boolean = false;
+  @HostBinding('class.isOnFocus')
+  get getIsOnFocus() {
+    return  this._isOnFocus
+  }
+
   @HostListener('focus') //при фокусе
   onFocus() {
-    this.changeElementBgColor(this.coolInputFocusBgColor)
+    this.changeElementBgColor(this.coolInputFocusBgColor);
+    this._isOnFocus = true;
 
   }
   @HostListener('blur') //потеря фокуса
   onBlur() {
-    this.changeElementBgColor(this.coolInputDefaultBgColor)
+    this.changeElementBgColor(this.coolInputDefaultBgColor);
+    this._isOnFocus = false
   }
 
   @HostListener('click', ['$event', '$event.target'])
@@ -40,7 +56,8 @@ export class CoolInputDirective implements OnInit{
   }
 
   changeElementBgColor(color: string) {
-    this.rend.setStyle(this.el.nativeElement, 'background-color', color);
+    this._backgroundColor = color;
+    // this.rend.setStyle(this.el.nativeElement, 'background-color', color);
 
   }
 }

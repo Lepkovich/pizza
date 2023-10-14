@@ -1,8 +1,20 @@
-<div class="product">
-  <div class="product-image">
-    <!--          <img [src]="'assets/images/products/' + product.image" alt="Пицца Мясная Делюкс">-->
-    <img src="assets/images/products/{{product.image}}">
-  </div>
+<div class="product" *isChicken="product.description">
+
+<!--  <div *ngIf="product.image; then productImageBlock else defaultImageBlock"></div>-->
+
+  <ng-template [ngIf]="product.image">
+    <div class="product-image" >
+      <img src="assets/images/products/{{product.image}}">
+    </div>
+  </ng-template>
+
+<!--  <ng-template #defaultImageBlock>-->
+<!--    <div class="product-image" >-->
+<!--      <img src="assets/images/pizza.png">-->
+<!--    </div>-->
+<!--  </ng-template>-->
+
+
   <custom-title [title]="product.title" >
 <!--    <p first>test message</p>-->
 <!--    <p second #second>wow</p>-->
