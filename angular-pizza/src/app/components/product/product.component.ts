@@ -36,7 +36,8 @@ export class ProductComponent implements  OnChanges{
     this.product = {
       image: '',
       title: '',
-      description: ''
+      description: '',
+      datetime: ''
     }
   }
 

@@ -10,6 +10,9 @@ import { ProductComponent } from './components/product/product.component';
 import { TitleComponent } from './components/title/title.component';
 import { CoolInputDirective } from './directives/cool-input.directive';
 import { IsChickenDirective } from './directives/is-chicken.directive';
+import { ChickenDescriptionPipe } from './pipes/chicken-description.pipe';
+import { WordUpperPipe } from './pipes/word-upper.pipe';
+import { ChickenProductsPipe } from './pipes/chicken-products.pipe';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { IsChickenDirective } from './directives/is-chicken.directive';
     ProductComponent,
     TitleComponent,
     CoolInputDirective,
-    IsChickenDirective
+    IsChickenDirective,
+    ChickenDescriptionPipe,
+    WordUpperPipe,
+    ChickenProductsPipe
   ],
     imports: [
         BrowserModule,

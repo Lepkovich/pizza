@@ -62,6 +62,9 @@
   <div class="container">
     <h2 class="products-title">Выберите свою любимую пиццу </h2>
     <div class="products-items" id="pizzas">
+
+<!--       для фильтра по 'кур' в title нужно применить пайп chickenProducts-->
+<!--      *ngFor="let product of products | chickenProducts"-->
       <product *ngFor="let product of products" [product]="product" (addToCartEvent)="addToCart($event, orderElement)"></product>
 <!--  <product *ngFor="let product of products" [product]="product" (addToCartEvent)="addToCart(product, orderElement)"></product>
           (addToCartEvent)="addToCart(product, orderElement) мы можем передать текущий product, вместо $event

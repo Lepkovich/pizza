@@ -1,27 +1,70 @@
-# AngularPizza
+# Модуль 12. Фреймворк Angular
+## УРОК №5. Компоненты
+Перенесли в product.component.html часть кода, отвечающего за отрисовку продукта.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.3.
+Перенесли в product.component.scss часть кода, отвечающие за стили продукта
 
-## Development server
+Вставили в app.component.html компонент с циклом <product *ngFor="let product of products"></product>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Для передачи данных из родительского в дочерний использовали декоратор @Input
 
-## Code scaffolding
+Настроили декоратор @Output для передачи значения из дочернего product.component.html  в родительский app.component.ts 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Создали событие Event Emitter в функции addProductToCart(), вызываемой по клику.
 
-## Build
+<product *ngFor="let product of products" [product]="product" (addToCartEvent)="addToCart($event, orderElement)"></product>
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+где $event - это отсылка к нашему слушателю emit(this.product) из функции addProductToCart(). Сама же функция addToCart() находится в родительском app.component.ts
 
-## Running unit tests
+Для параметра @Input настроили аксессоры (геттер и сеттер)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Получили product и значение title у него и передали дальше в upper case
 
-## Running end-to-end tests
+Создали еще 1 вложенный дочерний компонент <custom-title> и провзаимодейстовали с его экземпляром через директиву @ViewChild
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Настроили контентную проекцию и разместили элементы в дочерний компонент с помощью маркеров.
 
-## Further help
+Использовали директиву @ContentChild для получения в дочернем компоненте ссылки на элемент
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## УРОК №6. Директивы
+
+Настроили встроенные директивы:
+
+Атрибутные: ngModel, ngClass
+
+Структурные - меняют DOM. Примеры: ngFor, ngIf
+
+Создали кастомную атрибутную директиву coolInput и применили ее к нашим инпутам на странице.
+
+Внутри директивы поменяли цвет бэкграунда инпута на желтый.
+
+Настроили декоратор @HostListener для обработки событий focus и blur
+
+Использовали декоратор @HostBinding для добавления и снятия класса к элементу
+
+С помощью *ngIf then и else настроили замену картинки на дефолтную при отсутсвии картинки продукта.
+
+Создали структурную директиву *isChicken, которая ищет и фильтрует продукты по части в описании 'кур'
+## УРОК №7. Пайпы
+
+Применили встроенный UpperCasePipe:
+  <div class="product-text">{{product.description | uppercase}}</div>
+
+Применили встроенный datePipe:
+
+  <div>{{product.datetime | date}}</div>
+
+Применили Internationalization (i18n)
+
+Создали свой пайп chicken-description, который выберет из описания пиццы все куриные (используя regEx) и сделает их upperCase
+
+Создали пайп word-upper, в который получаем wordParts (массив фильтров из корня любых ингридиентов), и все слова с этим корнем делаем upperCase
+
+Создали пайп chicken-products, который применили к *ngFor="let product of products | chickenProducts"
+
+В пайпе приняли массив продуктов и вернули новый массив, в который попали только те продукты, в title которых есть 'кур'
+
+
+
+## УРОК №8. Сервисы и Dependency Injection
