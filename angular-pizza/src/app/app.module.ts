@@ -13,6 +13,7 @@ import { IsChickenDirective } from './directives/is-chicken.directive';
 import { ChickenDescriptionPipe } from './pipes/chicken-description.pipe';
 import { WordUpperPipe } from './pipes/word-upper.pipe';
 import { ChickenProductsPipe } from './pipes/chicken-products.pipe';
+import {ProductService} from "./services/product.service";
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { ChickenProductsPipe } from './pipes/chicken-products.pipe';
         AppRoutingModule,
         FormsModule
     ],
-  providers: [],
+  providers: [ProductService],
   bootstrap: [AppComponent, HeaderComponent, FooterComponent]
 })
 export class AppModule { }

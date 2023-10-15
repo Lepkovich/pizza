@@ -10,11 +10,13 @@ import {
 } from '@angular/core';
 import {ProductType} from "../../types/product.type";
 import {TitleComponent} from "../title/title.component";
+import {CartProductService} from "../../services/cart-product.service";
 
 @Component({
   selector: 'product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss'],
+  providers: [CartProductService]
   // encapsulation: ViewEncapsulation.None
 })
 
@@ -32,7 +34,7 @@ export class ProductComponent implements  OnChanges{
   @ViewChild('elem')
   private elem!: ElementRef
 
-  constructor() {
+  constructor(public cartProductService: CartProductService ) {
     this.product = {
       image: '',
       title: '',
@@ -51,5 +53,6 @@ export class ProductComponent implements  OnChanges{
 
     addProductToCart() {
       this.addToCartEvent.emit(this.titleComponent.toUpper());
+      this.cartProductService.count++; //увеличили кол-во конкретного продукта в корзине
     }
 }

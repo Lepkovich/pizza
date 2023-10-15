@@ -58,9 +58,10 @@
     </div>
   </div>
 </section>
+
 <section class="products" #productsElement>
   <div class="container">
-    <h2 class="products-title">Выберите свою любимую пиццу </h2>
+    <h2 class="products-title">Выберите свою любимую пиццу {{lateData | async}} </h2>
     <div class="products-items" id="pizzas">
 
 <!--       для фильтра по 'кур' в title нужно применить пайп chickenProducts-->
@@ -72,6 +73,7 @@
     </div>
   </div>
 </section>
+<div>{{cartService.count}}</div>
 <section class="order" #orderElement>
   <div class="container">
     <div class="order-text">
