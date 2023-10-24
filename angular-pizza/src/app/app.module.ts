@@ -16,6 +16,8 @@ import { ChickenProductsPipe } from './pipes/chicken-products.pipe';
 import {ProductService} from "./services/product.service";
 import { MainComponent } from './components/pages/main/main.component';
 import { AboutComponent } from './components/pages/about/about.component';
+import { ProductsComponent } from './components/pages/products/products.component';
+import { OrderComponent } from './components/pages/order/order.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { AboutComponent } from './components/pages/about/about.component';
     WordUpperPipe,
     ChickenProductsPipe,
     MainComponent,
-    AboutComponent
+    AboutComponent,
+    ProductsComponent,
+    OrderComponent
   ],
     imports: [
         BrowserModule,
@@ -38,6 +42,6 @@ import { AboutComponent } from './components/pages/about/about.component';
         FormsModule
     ],
   providers: [ProductService],
-  bootstrap: [AppComponent, HeaderComponent, FooterComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
