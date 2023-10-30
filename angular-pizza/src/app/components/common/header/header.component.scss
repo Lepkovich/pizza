@@ -25,6 +25,9 @@
   color: rgb(164, 107, 0);
   line-height: 1;
 }
+.menu-item a.active {
+  color: black;
+}
 .burger {
   display: none;
 }
