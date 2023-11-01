@@ -20,9 +20,9 @@ export class ProductsComponent implements OnInit{
   }
   products: ProductType[] = [];
 
-  public addToCart(title: string): void {
-    this.cartService.product = title; //мы использовали сервис cartService для хранения параметра
-    // this.router.navigate(['/order']); //просто перенаправили на /order
-    this.router.navigate(['/order'], {queryParams: {product: title}}); //передали название как URL-параметр
-  }
+  // public addToCart(title: string): void {
+  //   this.cartService.product-card = title; //мы использовали сервис cartService для хранения параметра
+  //   // this.router.navigate(['/order']); //просто перенаправили на /order
+  //   this.router.navigate(['/order'], {queryParams: {product-card: title}}); //передали название как URL-параметр
+  // }
 }

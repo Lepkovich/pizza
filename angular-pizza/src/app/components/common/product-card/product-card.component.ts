@@ -12,18 +12,18 @@ import {TitleComponent} from "../title/title.component";
 import {CartProductService} from "../../../services/cart-product.service";
 
 @Component({
-  selector: 'product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.scss'],
+  selector: 'product-card',
+  templateUrl: './product-card.component.html',
+  styleUrls: ['./product-card.component.scss'],
   providers: [CartProductService]
   // encapsulation: ViewEncapsulation.None
 })
 
 
-export class ProductComponent implements  OnChanges{
+export class ProductCardComponent implements  OnChanges{
   @Input() product: ProductType;
-  // @Input() product: ProductType = {} as ProductType; - один из работающих вариантов инициализации
-  // @Input() product!: ProductType;  - или так
+  // @Input() product-card: ProductType = {} as ProductType; - один из работающих вариантов инициализации
+  // @Input() product-card!: ProductType;  - или так
 
   @Output() addToCartEvent: EventEmitter<string> = new EventEmitter<string>();
 
@@ -35,6 +35,7 @@ export class ProductComponent implements  OnChanges{
 
   constructor(public cartProductService: CartProductService ) {
     this.product = {
+      id: 0,
       image: '',
       title: '',
       description: '',
@@ -50,8 +51,8 @@ export class ProductComponent implements  OnChanges{
   //     console.log(this.elem)
   //   }
 
-    addProductToCart() {
-      this.addToCartEvent.emit(this.titleComponent.toUpper());
-      this.cartProductService.count++; //увеличили кол-во конкретного продукта в корзине
-    }
+    // addProductToCart() { <--вместо вызова этой функции сразу в шаблоне поменяли route и queryParams
+    //   this.addToCartEvent.emit(this.titleComponent.toUpper());
+    //   this.cartProductService.count++; //увеличили кол-во конкретного продукта в корзине
+    // }
 }

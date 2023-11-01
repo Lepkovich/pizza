@@ -46,6 +46,11 @@ body {
   text-align: center;
 
 }
+.btn.btn-white {
+  background: transparent;
+  border: 1px solid rgb(255, 175, 24);
+  color: rgb(255, 175, 24);
+}
 .btn:hover {
   box-shadow: 5px 5px 5px #806639;
 }
