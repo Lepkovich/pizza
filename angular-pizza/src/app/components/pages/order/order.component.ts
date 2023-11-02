@@ -24,15 +24,12 @@ export class OrderComponent implements OnInit{
     //   this.formValues.productTitle = this.cartService.product-card; //использовали сервис cartService для передачи параметра
     // }
 
-    const productParam = this.activatedRoute.snapshot.queryParamMap.get('product'); //сделали snapshot
-    if (productParam) {
-      this.formValues.productTitle = productParam; //передали значение снэпшота в поле
-    }
-    // this.activatedRoute.queryParams.subscribe((params) => { //колл-бэк функция с одним параметром
-    //   if(params['product-card']) {
-    //     this.formValues.productTitle = params['product-card']; //передали параметр product-card в URLe
-    //   }
-    // })
+
+    this.activatedRoute.queryParams.subscribe((params) => { //колл-бэк функция с одним параметром
+      if(params['product']) {
+        this.formValues.productTitle = params['product']; //передали параметр product-card в URLe
+      }
+    })
   }
 
   public createOrder() {
