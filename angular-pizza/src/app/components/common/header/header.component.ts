@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CartService} from "../../../services/cart.service";
 import {AuthService} from "../../../auth/auth.service";
 
@@ -7,8 +7,19 @@ import {AuthService} from "../../../auth/auth.service";
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
+
+  public loggedState: boolean = false;
+
   constructor(public cartService: CartService, private authService: AuthService) {
+  }
+
+  ngOnInit() {
+    this.authService.isLogged$.subscribe((isLoggedIn: boolean) => {
+      this.loggedState = isLoggedIn;
+      //other logic
+      console.log('State has been changed: ' + isLoggedIn)
+    })
   }
 
   login() {
