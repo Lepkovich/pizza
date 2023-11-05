@@ -1,13 +1,14 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CartService} from "../../../services/cart.service";
 import {ActivatedRoute} from "@angular/router";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.scss']
 })
-export class OrderComponent implements OnInit{
+export class OrderComponent implements OnInit, OnDestroy{
 
   constructor(private cartService: CartService, //класс общего с product-card.component сервиса
               private activatedRoute: ActivatedRoute) { //класс для подписки на Observable
@@ -19,17 +20,23 @@ export class OrderComponent implements OnInit{
     phone: '',
   }
 
+  private subscription: Subscription | null = null;
+
   ngOnInit(): void {
     // if(this.cartService.product-card) {
     //   this.formValues.productTitle = this.cartService.product-card; //использовали сервис cartService для передачи параметра
     // }
 
 
-    this.activatedRoute.queryParams.subscribe((params) => { //колл-бэк функция с одним параметром
+    this.subscription = this.activatedRoute.queryParams.subscribe((params) => { //колл-бэк функция с одним параметром
       if(params['product']) {
         this.formValues.productTitle = params['product']; //передали параметр product-card в URLe
       }
     })
+  }
+
+  ngOnDestroy() {
+    this.subscription?.unsubscribe()
   }
 
   public createOrder() {
