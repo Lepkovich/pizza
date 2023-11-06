@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CartService} from "../../../services/cart.service";
 import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs";
+import {ProductService} from "../../../services/product.service";
 
 @Component({
   selector: 'app-order',
@@ -11,8 +12,9 @@ import {Subscription} from "rxjs";
 export class OrderComponent implements OnInit, OnDestroy{
 
   constructor(private cartService: CartService, //класс общего с product-card.component сервиса
-              private activatedRoute: ActivatedRoute) { //класс для подписки на Observable
-  }
+              private activatedRoute: ActivatedRoute, //класс для подписки на Observable
+              private productService: ProductService //здесь наша функция createOrder
+  ) {}
 
   public formValues = {
     productTitle: '',
@@ -21,6 +23,7 @@ export class OrderComponent implements OnInit, OnDestroy{
   }
 
   private subscription: Subscription | null = null;
+  private subscriptionOrder: Subscription | null = null;
 
   ngOnInit(): void {
     // if(this.cartService.product-card) {
@@ -36,7 +39,8 @@ export class OrderComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy() {
-    this.subscription?.unsubscribe()
+    this.subscription?.unsubscribe();
+    this.subscriptionOrder?.unsubscribe()
   }
 
   public createOrder() {
@@ -52,12 +56,24 @@ export class OrderComponent implements OnInit, OnDestroy{
       alert('Заполните телефон');
       return;
     }
-    alert('Спасибо за заказ!');
 
-    this.formValues = {
-      productTitle: '',
-      address: '',
-      phone: '',
-    }
+    this.subscriptionOrder = this.productService.createOrder({
+      product: this.formValues.productTitle,
+      address: this.formValues.address,
+      phone: this.formValues.phone
+    })
+      .subscribe(response => {
+        if (response.success && !response.message) {
+          alert('Спасибо за заказ!');
+
+          this.formValues = {
+            productTitle: '',
+            address: '',
+            phone: '',
+          }
+        } else {
+          alert('Ошибка!');
+        }
+      })
   }
 }

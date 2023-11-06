@@ -13,8 +13,9 @@ import {catchError, map, of, retry, tap} from "rxjs";
 })
 export class ProductsComponent implements OnInit {
 
-  constructor(private http: HttpClient,
-              // private productService: ProductService,
+  constructor(
+              // private http: HttpClient,
+              private productService: ProductService,
               // private cartService: CartService,
               private router: Router
   ) {
@@ -23,18 +24,7 @@ export class ProductsComponent implements OnInit {
   products: ProductType[] = [];
 
   ngOnInit() {
-    this.http.get<{ data: ProductType[] }>('http://testologiaa.site/pizzas?extraField=1')
-      .pipe(
-        tap((result) => {
-          console.log(result)
-        }),
-        map((result) => (result.data)),
-        // catchError(error => {
-        //   // throw new Error('omg'); выбрасываем стандартную ошибку
-        //   return of([]);
-        // }),
-        retry(3)
-      )
+    this.productService.getProducts()
       .subscribe(
         {
           next: (data) => {
@@ -46,8 +36,6 @@ export class ProductsComponent implements OnInit {
           }
         }
       )
-
-    // this.products = this.productService.getProducts();
   }
 
   // public addToCart(title: string): void {

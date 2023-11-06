@@ -26,12 +26,16 @@ export class ProductComponent implements OnInit{
 
     this.activatedRoute.params.subscribe((params) => {
       if(params['id']) {
-        const product = this.productService.getProduct(+params['id']);
-        if(product) {
-          this.product =  product;
-        } else {
-          this.router.navigate(['/'])
-        }
+
+        this.productService.getProduct(+params['id'])
+          .subscribe({
+            next: (data) => {
+              this.product = data;
+            },
+            error: (error) => {
+              this.router.navigate(['/'])
+            }
+          })
       }
     })
   }
