@@ -21,6 +21,11 @@ export class AuthService {
     this.isLogged$.next(this.isLogged);
   }
 
+  getToken() {
+    //берем токен из LocalStorage
+    return 'test';
+  }
+
   isLoggedIn():boolean {
     return this.isLogged;
   }
