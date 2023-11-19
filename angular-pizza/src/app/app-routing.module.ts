@@ -1,21 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {MainComponent} from "./components/pages/main/main.component";
-import {AboutComponent} from "./components/pages/about/about.component";
-import {OrderComponent} from "./components/pages/order/order.component";
-import {ProductsComponent} from "./components/pages/products/products.component";
-import {ProductComponent} from "./components/pages/product/product.component";
-import {AuthGuard} from "./auth/auth.guard";
+import {OrderComponent} from "./views/order/order.component";
+import {LayoutComponent} from "./views/layout.component";
 
 const routes: Routes = [
-  {path: '', component: MainComponent},
-  {path: 'about', component: AboutComponent},
-  {path: 'products', component: ProductsComponent},
-  {path: 'products/:id', component: ProductComponent},
-  {path: 'order', component: OrderComponent, canActivate: [AuthGuard]},
+
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [
+      {path: '', loadChildren: () => import ('./views/home/home.module').then(m => m.HomeModule)},
+      {path: 'order', loadChildren: () => import ('./views/order/order.module').then(m => m.OrderModule)},
+      {path: 'products', loadChildren: () => import ('./views/products/products.module').then(m => m.ProductsModule)},
+    ]
+  },
+
   {path: '**', component: OrderComponent}, //здесь нужно указать компонент notFound или обработчик 404 страницы
+  {path: 'pizzas', redirectTo: 'products'}, //или редирект на новую версию уже несуществующей страницы
   // {path: '**', redirectTo: ''}, //или редирект на главную
-  // {path: 'pizzas', redirectTo: 'products'}, //или редирект на новую версию уже несуществующей страницы
+
 ];
 
 @NgModule({
