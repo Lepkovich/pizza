@@ -3,6 +3,7 @@ import {from, map, Observable, Subject, Subscription} from "rxjs";
 import {CartService} from "../../../shared/services/cart.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {PopupComponent} from "../../../shared/components/popup/popup.component";
+import {environment} from "../../../../environments/environment";
 
 // declare var bootstrap: any;
 // import * as bootstrap from "bootstrap"
@@ -19,6 +20,7 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
   // private observable: Observable<number>;
   private subscription: Subscription | null = null;
   private subject: Subject<number>
+
 
 
 
@@ -60,6 +62,8 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit() {
     // const myModalAlternative = new bootstrap.Modal('#myModal', {});
     // myModalAlternative.show();
+
+    console.log(environment.production)
 
     this.subscription = this.subject
       .subscribe(

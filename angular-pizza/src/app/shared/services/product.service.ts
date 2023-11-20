@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {ProductType} from "../../../types/product.type";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {map, Observable, tap} from "rxjs";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class ProductService {
   getTestProducts(): Observable<ProductType[]> { //тренировались в уроке
    let params = new HttpParams();
    params = params.set('extraField', 1)
-   return this.http.get<{ data: ProductType[]}>('https://testologia.site/pizzas', {
+   return this.http.get<{ data: ProductType[]}>(environment.apiURL + 'pizzas', {
      // observe: "response",
      // responseType: "json"
      // headers: new HttpHeaders({
@@ -34,14 +35,14 @@ export class ProductService {
   }
 
   getProducts(): Observable<ProductType[]> {
-    return this.http.get<ProductType[]>('https://testologia.site/pizzas');
+    return this.http.get<ProductType[]>(environment.apiURL +'pizzas');
   }
 
   getProduct(id:number): Observable<ProductType> {
-   return this.http.get<ProductType>(`https://testologia.site/pizzas?id=${id}`);
+   return this.http.get<ProductType>(environment.apiURL + `pizzas?id=${id}`);
   }
 
   createOrder(data: {product: string, address: string, phone: string }) {
-    return this.http.post<{ success: boolean, message?: string }>(`https://testologia.site/order-pizza`, data);
+    return this.http.post<{ success: boolean, message?: string }>(environment.apiURL +`order-pizza`, data);
   }
 }
