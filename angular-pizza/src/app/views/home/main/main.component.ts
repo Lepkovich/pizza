@@ -1,6 +1,11 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {from, map, Observable, Subject, Subscription} from "rxjs";
 import {CartService} from "../../../shared/services/cart.service";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {PopupComponent} from "../../../shared/components/popup/popup.component";
+
+// declare var bootstrap: any;
+// import * as bootstrap from "bootstrap"
 
 @Component({
   selector: 'app-main',
@@ -9,11 +14,13 @@ import {CartService} from "../../../shared/services/cart.service";
 })
 
 
-export class MainComponent implements OnInit, OnDestroy {
+export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // private observable: Observable<number>;
   private subscription: Subscription | null = null;
   private subject: Subject<number>
+
+
 
 
   constructor(public cartService: CartService) {
@@ -51,6 +58,9 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    // const myModalAlternative = new bootstrap.Modal('#myModal', {});
+    // myModalAlternative.show();
+
     this.subscription = this.subject
       .subscribe(
       {
@@ -64,11 +74,26 @@ export class MainComponent implements OnInit, OnDestroy {
     );
   }
 
+  @ViewChild(PopupComponent)
+  private popupComponent!: PopupComponent
+
+  ngAfterViewInit() {
+    this.popupComponent.open();
+
+
+    // const modalRef = this.modalService.open(PopupComponent);
+    // modalRef.componentInstance.data = 'Main component';
+
+    // this.modalService.open(this.popup, {});
+  }
+
   ngOnDestroy() {
     this.subscription?.unsubscribe();
   }
 
   test() {
+    // this.modalService.open(this.popup, {});
+
     this.subject
       .pipe(
         map((number) => {
