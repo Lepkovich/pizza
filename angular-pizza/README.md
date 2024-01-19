@@ -1,34 +1,14 @@
-## МОДУЛЬ №12. УРОК №13
-### Работа с HTTP
+## МОДУЛЬ №12. УРОК №16
+### Библиотеки компонентов
 
-С помощью сервиса HttpClient в Angular настроил получение массива products компонента products.
-
->this.http.get(url).subscribe( data => {…} )>
-
-Сделал утверждение "массив строк" для get запроса:
->this.http.get<string[]>(url).subscribe( data => {…} )>
-
-В методе pipe применил функции map и tap:
->.pipe(tap((result) => {
-console.log(result)
-}),
-map((result) => (result.data)),
-)>
-
-Правильный синтаксис retry:
-> this.http.get(url).pipe( retry(5) ).subscribe( data => {…} )>
-
-Настроил catchError в observable:
->this.http.get(url).pipe( catchError( error => {…} ) ).subscribe( data => {…} )>
-
-Настроил передачу заголовков при запросе:
->this.http.get(url, { headers: new HttpHeaders( {…} ) } )>
-
-Передал в product.service данные на сервер :
->this.http.post(url, params)>
-
-Настроил interceptor в auth.interceptor
-
-Настроил лоадер в компоненте products через переменную loader.
+В этом уроке:
+1. Подключили JavaScript и CSS библиотеки в Angular-проект, включая добавление файлов напрямую и установку через npm.
+2. Работа с библиотекой Bootstrap в Angular, как через прямое подключение файлов, так и через npm.
+3. Использование библиотеки `ng-bootstrap` в качестве Angular-специфичной альтернативы для Bootstrap.
+4. Принципы работы с тайпингами для TypeScript, облегчающие интеграцию сторонних библиотек.
+5. Создание и использование модальных окон с помощью `ng-bootstrap` и их интеграция в компоненты Angular.
+6. Примеры использования разных подходов к реализации модальных окон, включая использование `ng-template` и отдельных Angular компонентов.
+7. Обзор других популярных библиотек компонентов, включая Angular Material и PrimeNG, и их интеграцию в Angular-проекты.
+8. Советы и лучшие практики по выбору и использованию библиотек компонентов для различных проектов на Angular.
 
 
