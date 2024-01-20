@@ -1,9 +1,14 @@
-FROM node:20-alpine
+FROM node:20-alpine as build
 WORKDIR /frontend
 RUN npm install -g @angular/cli
 COPY package.json .
 RUN npm install
 COPY . .
-EXPOSE 4200
-CMD echo "N" | ng serve --host 0.0.0.0 --port 4200
+RUN npm run build
+
+FROM nginx
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /frontend/dist/angular-pizza /usr/share/nginx/html
+EXPOSE 9090
+
 
